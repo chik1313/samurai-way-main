@@ -1,0 +1,9 @@
+.item {
+    color: navajowhite ;
+}
+
+.item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+}
