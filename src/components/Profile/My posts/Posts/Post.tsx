@@ -2,8 +2,11 @@ import React from "react";
 import s from './Post.module.css';
 import {message} from "antd";
 
+
+
 type MessageType = {
     message: string
+    likesCount: number
 }
 
 let Post:React.FC<MessageType> = (props) => {
@@ -14,7 +17,7 @@ let Post:React.FC<MessageType> = (props) => {
                  alt=""/>
             {props.message}
             <div>
-                <span>Like</span>
+                <span>like:{props.likesCount}</span>
             </div>
         </div>
     );

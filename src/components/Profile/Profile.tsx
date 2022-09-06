@@ -1,14 +1,23 @@
 import React from "react";
 import s from './Profile.module.css'
-import MyPosts from "./My posts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPosts from "./My posts/MyPosts";
+import myPosts from "./My posts/MyPosts";
+import {PostsDataType} from "../../types";
 
-let Profile = () => {
+type PropsType = {
+    postsData: Array<PostsDataType>
+}
+
+let Profile = (props: PropsType) => {
+
     return (
         <div className={s.content}>
             <ProfileInfo/>
-          <MyPosts />
+             <MyPosts  postsData={props.postsData}/>
         </div>);
 }
 
 export default Profile;
+
+
