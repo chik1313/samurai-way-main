@@ -1,20 +1,34 @@
+
+
 export type PostsDataType = {
     id: number,
     message: string,
-    likesCount: number
+    likesCount: number,
+
 }
 export type messagesDataType = {
     id: number,
     message: string
 }
-
 export type dialogsDataType = {
     id: number,
     name: string
 }
-export type StateType = {
+type profilePageType = {
+    postsData:Array<PostsDataType>,
+    newPostText:string
+}
+type messagesPageType = {
     dialogsData:Array<dialogsDataType>,
     messagesData:Array<messagesDataType>
-    postsData: Array<PostsDataType>
+}
 
+export type StateType = {
+    profilePage: profilePageType,
+    messagesPage: messagesPageType
+}
+
+export type addMessageType = {
+    addPost: () => void,
+    updateNewPostText: (newText:string) => void
 }
