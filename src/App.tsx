@@ -5,22 +5,30 @@ import Nav from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {StateType} from "./types";
-import {addPost, updateNewPostText} from "./state";
+import {ActionTypes, StoreType} from "./types";
+import {store} from "./Redux/state";
+
 
 type PropsType = {
-    state: StateType
+    store: StoreType,
+
 }
 
-let App:React.FC<PropsType> = ({state}) => {
+let App:React.FC<PropsType> = (props) => {
+    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path={"/Dialogs"} render={() => <Dialogs dialogsData={state.messagesPage.dialogsData} messagesData={state.messagesPage.messagesData}/>}/>
-                    <Route path={"/Profile"} render={() => <Profile postsData={state.profilePage.postsData} addPost={addPost} newPostText={state.profilePage.newPostText} updateNewPostText={updateNewPostText}/>} />
+
+                    <Route path={"/Dialogs"}
+
+                           render={() => <Dialogs dialogsData={state.messagesPage.dialogsData} messagesData={state.messagesPage.messagesData} dispatch={props.store.dispatch.bind(props.store)}  newMessageText={state.messagesPage.newMessageText}/>}/>
+
+                    <Route path={"/Profile"}
+                           render={() => <Profile postsData={state.profilePage.postsData}  newPostText={state.profilePage.newPostText} dispatch={props.store.dispatch.bind(props.store)} />} />
                 </div>
             </div>
         </BrowserRouter>);
