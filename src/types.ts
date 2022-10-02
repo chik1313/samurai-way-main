@@ -1,3 +1,4 @@
+
 export type PostsDataType = {
     id: number,
     message: string,
@@ -12,11 +13,11 @@ export type dialogsDataType = {
     id: number,
     name: string
 }
-type profilePageType = {
+export type profilePageType = {
     postsData: Array<PostsDataType>,
     newPostText: string
 }
-type messagesPageType = {
+export type messagesPageType = {
     dialogsData: Array<dialogsDataType>,
     messagesData: Array<messagesDataType>,
     newMessageText: string
@@ -34,6 +35,7 @@ export type StoreType = {
     subscribe: (observer:  () => void) => void,
     getState: () => StateType,
     dispatch: (action:ActionTypes) => void
+
 }
 
 type AddPostType = {
