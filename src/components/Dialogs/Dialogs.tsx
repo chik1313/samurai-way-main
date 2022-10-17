@@ -3,33 +3,23 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/MessageItem";
 import {messagesPageType} from "../../types";
+import {DialogsPropsType} from "./Dialogs-container";
 
 
-
-type PropsType = {
-    state: messagesPageType
-    // dialogsData: dialogsDataType[]
-    // messagesData: messagesDataType[]
-    // newMessageText: string
-    updateNewMessage: (body:string) =>void
-    sendMessage: ()=>void
-
-}
-
-const Dialogs = (props: PropsType) => {
+const Dialogs = (props: DialogsPropsType) => {
     //let state = props.state.messagesPage
-    let dialogsElements = props.state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
-    let messagesElements = props.state.messagesData.map(m => <Message message={m.message}/>)
-    let newMessageBody = props.state.newMessageText;
+    let dialogsElements = props.messagesPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    let messagesElements = props.messagesPage.messagesData.map(m => <Message message={m.message}/>)
+    let newMessageBody = props.messagesPage.newMessageText;
 
 
     let onSendMessageClick = () => {
         //let text = props.state.newMessageText
-        props.sendMessage();
+        props.onSendMessageClick();
     }
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value;
-        props.updateNewMessage(body);
+        props.onNewMessageChange(body);
 
     }
     return (

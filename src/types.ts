@@ -5,11 +5,11 @@ export type PostsDataType = {
     likesCount: number,
 
 }
-export type messagesDataType = {
+ type messagesDataType = {
     id: number,
     message: string
 }
-export type dialogsDataType = {
+ type dialogsDataType = {
     id: number,
     name: string
 }
@@ -29,13 +29,10 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType,
-    // addPost: () => void,
-    // updateNewPostText: (newText: string) => void,
     callSubscriber: () => void,
     subscribe: (observer:  () => void) => void,
     getState: () => StateType,
     dispatch: (action:ActionTypes) => void
-
 }
 
 type AddPostType = {

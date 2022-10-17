@@ -12,12 +12,12 @@ type PropsType = {
 
 }
 
-let Profile = (props: PropsType) => {
+let Profile = () => {
 
     return (
         <div className={s.content}>
             <ProfileInfo/>
-             <MyPostsContainer postsData={props.postsData} dispatch={props.dispatch} newPostText={props.newPostText} store={props.store} />
+             <MyPostsContainer />
         </div>);
 }
 

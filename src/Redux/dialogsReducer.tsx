@@ -1,27 +1,36 @@
 import {ActionTypes, messagesPageType} from "../types";
 
+export type messagesDataType = {
+    id: number,
+    message: string
+}
+export type dialogsDataType = {
+    id: number,
+    name: string
+}
+
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT"
 const SEND_MESSAGE = "SEND-MESSAGE"
 
-let initialState:messagesPageType = {
+let initialState = {
     dialogsData: [
         {id: 1, name: "Vladich"},
         {id: 2, name: "Natali"},
         {id: 3, name: "Alex"},
         {id: 4, name: "Alex"},
         {id: 5, name: "KaLkalych"}
-    ],
+    ] as Array<dialogsDataType>,
     messagesData: [
         {id: 1, message: "Hey"},
         {id: 2, message: "How are you"},
         {id: 3, message: "Kal kalych"},
         {id: 4, message: "How are you"}
-    ],
+    ] as Array<messagesDataType>,
     newMessageText: ""
 }
 
-
-const dialogsReducer = (state=initialState, action:ActionTypes) => {
+export type InitialStateType = typeof initialState;
+const dialogsReducer = (state:InitialStateType=initialState, action:ActionTypes):InitialStateType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.body

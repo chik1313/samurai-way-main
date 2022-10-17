@@ -2,6 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import Post from "./Posts/Post";
 import {PostsDataType} from "../../../types";
+import {DialogsPropsType} from "../../Dialogs/Dialogs-container";
+import {MyPostsPropsType} from "./MyPosts-container";
 
 
 type PropsType = {
@@ -11,7 +13,7 @@ type PropsType = {
     onPostChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
 }
 
-let MyPosts = (props: PropsType) => {
+let MyPosts = (props: MyPostsPropsType) => {
     let postsElement = props.postsData.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
     let addPost = () => {
