@@ -2,12 +2,11 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/MessageItem";
-import {messagesPageType} from "../../types";
 import {DialogsPropsType} from "./Dialogs-container";
 
 
 const Dialogs = (props: DialogsPropsType) => {
-    //let state = props.state.messagesPage
+
     let dialogsElements = props.messagesPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
     let messagesElements = props.messagesPage.messagesData.map(m => <Message message={m.message}/>)
     let newMessageBody = props.messagesPage.newMessageText;

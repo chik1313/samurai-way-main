@@ -1,4 +1,4 @@
-import {ActionTypes, messagesPageType} from "../types";
+import {ActionTypes} from "../types";
 
 export type messagesDataType = {
     id: number,
@@ -30,16 +30,20 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState;
-const dialogsReducer = (state:InitialStateType=initialState, action:ActionTypes):InitialStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.body
-            return state;
+            return {
+                ...state,
+                newMessageText: action.body
+            };
         case SEND_MESSAGE:
             let body = state.newMessageText;
-            state.messagesData.push({id: 6, message: body})
-            state.newMessageText = '';
-            return state
+            return {
+                ...state,
+                newMessageText: '',
+                messagesData: [...state.messagesData, {id: 6, message: body}]
+            }
         default :
             return state;
     }

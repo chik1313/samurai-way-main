@@ -10,15 +10,15 @@ export type DispatchPropsType = {
     onNewMessageChange: (body: string) => void
 }
 
-export type MapStateToPropsType =  ReturnType<typeof mapStateToProps>
+export type MapStateToPropsType = ReturnType<typeof mapStateToProps>
 export type DialogsPropsType = DispatchPropsType & MapStateToPropsType
 
-const mapStateToProps = (state:AllStateType) => {
+const mapStateToProps = (state: AllStateType) => {
     return {
-messagesPage: state.dialogsReducer
+        messagesPage: state.dialogsPage
     }
 }
-const mapDispatchToProps = (dispatch:Dispatch):DispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): DispatchPropsType => {
     return {
         onSendMessageClick: () => {
             dispatch(sendMessageCreator())
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch:Dispatch):DispatchPropsType => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 
 export default DialogsContainer;

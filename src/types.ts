@@ -5,6 +5,14 @@ export type PostsDataType = {
     likesCount: number,
 
 }
+export type UsersDataType = {
+    id: number,
+    photoUrl: string,
+    followed:boolean,
+    fullName: string,
+    status: string,
+    location : {city: string, country: string}
+}
  type messagesDataType = {
     id: number,
     message: string
@@ -16,6 +24,9 @@ export type PostsDataType = {
 export type profilePageType = {
     postsData: Array<PostsDataType>,
     newPostText: string
+}
+export type usersPageType = {
+    users: Array<UsersDataType>,
 }
 export type messagesPageType = {
     dialogsData: Array<dialogsDataType>,
@@ -53,9 +64,20 @@ type SendMessageType = {
     type:"SEND-MESSAGE",
 
 }
+type followType = {
+    type: "FOLLOW",
+    userID:number
+}
+type unfollowType = {
+    type: "UNFOLLOW",
+    userID:number
+}
+type setusersType = {
+    type: "SET_USERS",
+    users:any
+}
 
-
-export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType
+export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType ;
 
 
 export type addMessageType = {
