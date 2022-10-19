@@ -7,9 +7,9 @@ export type PostsDataType = {
 }
 export type UsersDataType = {
     id: number,
-    photoUrl: string,
+    photos: { small: string, large: string }
     followed:boolean,
-    fullName: string,
+    name: string,
     status: string,
     location : {city: string, country: string}
 }
