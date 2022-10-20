@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Users} from "./Users";
+import Users from "./UsersC";
 import {Dispatch} from "redux";
 import {AllStateType} from "../../Redux/redux-store";
 import {followAC, setUsersAC, unfollowAC} from "../../Redux/UsersReducer";
 
-export type DispatchPropsType = {
+ type DispatchPropsType = {
     follow: (userID: number) => void,
     unfollow: (userID: number) => void,
     setUsers: (users: any) => void

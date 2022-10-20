@@ -16,6 +16,12 @@ let Nav = () => {
             <div className={`${s.item} ${s.active}`}>
                 <NavLink to='/Dialogs' activeClassName={s.activeLink}>Messages</NavLink>
             </div>
+            <div className={`${s.item} ${s.active}`}>
+                <NavLink to='/Users' activeClassName={s.activeLink}>Users</NavLink>
+            </div>
+            <div className={s.item}>
+                <a>News</a>
+            </div>
             <div className={s.item}>
                 <a>News</a>
             </div>
