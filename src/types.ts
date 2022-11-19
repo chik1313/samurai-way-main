@@ -27,6 +27,10 @@ export type profilePageType = {
 }
 export type usersPageType = {
     users: Array<UsersDataType>,
+    pageSize:number
+    totalUsersCount:number
+    currentPage: number
+    isFetching:boolean
 }
 export type messagesPageType = {
     dialogsData: Array<dialogsDataType>,
@@ -76,8 +80,19 @@ type setusersType = {
     type: "SET_USERS",
     users:any
 }
-
-export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType ;
+type setCurrentPageType = {
+    type: "SET_CURRENT_PAGE",
+    currentPage:number
+}
+type setTotalUsersCountType = {
+    type: "SET_TOTAL_USERS_COUNT",
+    totalCount:number
+}
+type ToggleIsFetchinType = {
+    type: "TOGGLE_IS_FETCHING",
+    isFetching: boolean
+}
+export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType;
 
 
 export type addMessageType = {

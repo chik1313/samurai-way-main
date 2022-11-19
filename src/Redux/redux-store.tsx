@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, createStore, legacy_createStore} from "redux";
 import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./ProfileReducer";
 import usersReducer from "./UsersReducer";
@@ -11,7 +11,7 @@ let rootReducer = combineReducers({
     usersPage:usersReducer
 });
 
-let store = createStore(rootReducer)
+let store = legacy_createStore(rootReducer)
 
 
 
