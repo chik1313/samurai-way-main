@@ -11,13 +11,13 @@ let Nav = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to='/Profile' activeClassName={s.activeLink}>Profile</NavLink>
+                <NavLink to='/Profile' className={({isActive}) => isActive ? s.activeLink : ""}>Profile</NavLink>
             </div>
             <div className={`${s.item} ${s.active}`}>
-                <NavLink to='/Dialogs' activeClassName={s.activeLink}>Messages</NavLink>
+                <NavLink to='/Dialogs' className={({isActive}) => isActive ? s.activeLink : ""}>Messages</NavLink>
             </div>
             <div className={`${s.item} ${s.active}`}>
-                <NavLink to='/Users' activeClassName={s.activeLink}>Users</NavLink>
+                <NavLink to='/Users' className={({isActive}) => isActive ? s.activeLink : ""}>Users</NavLink>
             </div>
             <div className={s.item}>
                 <a>News</a>

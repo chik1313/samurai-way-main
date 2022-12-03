@@ -1,15 +1,19 @@
 import {ActionTypes, PostsDataType, profilePageType} from "../types";
+import {Contacts, Photos} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
+const SET_USER_PROFILE = "SET_USER_PROFILE"
+
 
 let initialState:profilePageType = {
         postsData: [
             {id: 1, message: "Hi,how are you?", likesCount: 14},
             {id: 2, message: "Hello,it's my first post!", likesCount: 15}
         ],
-        newPostText: 'it-kamasutra.com'
-}
+        newPostText: 'it-kamasutra.com',
+     profile: null
+};
 
 const profileReducer = (state=initialState, action:ActionTypes) => {
     switch (action.type) {
@@ -30,6 +34,9 @@ const profileReducer = (state=initialState, action:ActionTypes) => {
             newPostText: action.newText
             };
         }
+        case "SET_USER_PROFILE": {
+            return {...state,profile:action.profile}
+        }
         default :
             return state;
         }
@@ -46,6 +53,12 @@ export const updateNewPostTextActionCreator = (text: string) => {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
     } as const
+}
+export const setUserProfileAC = (profile:string) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
+    }
 }
 
 export default profileReducer;

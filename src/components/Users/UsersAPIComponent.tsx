@@ -3,12 +3,12 @@ import axios from "axios";
 import Users from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {UsersPropsType} from "./UsersContainer";
+import {getUsers} from "../api/api";
 
 class UsersAPIComponent extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.toggleIsFetchingAC(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}`)
-            .then(responce => {
+            getUsers(this.props.currentPage , this.props.pageSize).then(responce => {
                 this.props.toggleIsFetchingAC(false)
                 this.props.setUsersAC(responce.data.items)
                 this.props.setTotalUsersCountAC(responce.data.totalCount)
@@ -19,7 +19,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
     onPageChange = (p: number) => {
         this.props.setCurrentPageAC(p)
         this.props.toggleIsFetchingAC(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize} `).then(responce => {
+        getUsers(p , this.props.pageSize).then(responce => {
             this.props.toggleIsFetchingAC(false)
             this.props.setUsersAC(responce.data.items)
         })

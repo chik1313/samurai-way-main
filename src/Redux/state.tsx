@@ -10,7 +10,8 @@ export let store: StoreType = {
                 {id: 1, message: "Hi,how are you?", likesCount: 14},
                 {id: 2, message: "Hello,it's my first post!", likesCount: 15}
             ],
-            newPostText: 'it-kamasutra.com'
+            newPostText: 'it-kamasutra.com',
+            profile: null
 
         },
         messagesPage: {
