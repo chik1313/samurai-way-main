@@ -1,4 +1,3 @@
-
 export type PostsDataType = {
     id: number,
     message: string,
@@ -32,6 +31,7 @@ export type usersPageType = {
     totalUsersCount:number
     currentPage: number
     isFetching:boolean
+    followingInProgress: number[]
 }
 export type authPageType = {
     id: string | null
@@ -99,6 +99,12 @@ type ToggleIsFetchinType = {
     type: "TOGGLE_IS_FETCHING",
     isFetching: boolean
 }
+type FollowingInProgress = {
+    type: "FOLLOWING_IN_PROGRESS",
+    isFetching:boolean
+    userId:number
+
+}
 type setUserProfileType = {
     type: "SET_USER_PROFILE",
     profile:string
@@ -113,7 +119,7 @@ type setUsersDataType = {
         isAuth:boolean
     }
 }
-export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType;
+export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress;
 
 
 export type addMessageType = {

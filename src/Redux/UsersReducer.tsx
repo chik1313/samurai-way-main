@@ -1,4 +1,6 @@
 import {ActionTypes, UsersDataType, usersPageType} from "../types";
+import {usersAPI} from "../components/api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -6,7 +8,7 @@ const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
-
+const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
 
 
 let initialState: usersPageType = {
@@ -14,11 +16,10 @@ let initialState: usersPageType = {
     pageSize: 10,
     totalUsersCount: 19,
     currentPage: 1,
-    isFetching: true
-
-
-
+    isFetching: true,
+    followingInProgress: [] as number[]
 }
+
 export type InitialStateType = typeof initialState;
 export const usersReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
@@ -36,13 +37,21 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {...state, users: action.users}
         }
         case "SET_CURRENT_PAGE": {
-            return { ...state , currentPage:action.currentPage }
+            return {...state, currentPage: action.currentPage}
         }
         case "SET_TOTAL_USERS_COUNT": {
-            return {...state, totalUsersCount:action.totalCount}
+            return {...state, totalUsersCount: action.totalCount}
         }
         case "TOGGLE_IS_FETCHING": {
-            return {...state, isFetching:action.isFetching}
+            return {...state, isFetching: action.isFetching}
+        }
+        case "FOLLOWING_IN_PROGRESS": {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
         }
         default :
             return state;
@@ -66,24 +75,44 @@ export const setUsersAC = (users: Array<UsersDataType>) => {
     return {
         type: SET_USERS,
         users
-    }as const
+    } as const
 }
-export const setCurrentPageAC = (currentPage:number)=> {
+export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
-    }as const
+    } as const
 }
-export const setTotalUsersCountAC = (totalCount:number) => {
+export const setTotalUsersCountAC = (totalCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalCount
     }
 }
-export const toggleIsFetchingAC = (isFetching:boolean) => {
+export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching
     }
 }
+export const toggleFollowingInProgressAC = (isFetching: boolean, userId: number) => {
+    return {
+        type: FOLLOWING_IN_PROGRESS,
+        isFetching,
+        userId
+    }
+}
+
+export const getUsersThunkCreator = (currentPage:number , pageSize:number) => {
+   return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetchingAC(true));
+        usersAPI.getUsers(currentPage , pageSize).then(data => {
+            dispatch(setCurrentPageAC(currentPage));
+            dispatch(toggleIsFetchingAC(false))
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalUsersCountAC(data.totalCount))
+        });
+    }
+}
+
 export default usersReducer;
