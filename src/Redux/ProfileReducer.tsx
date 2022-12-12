@@ -1,5 +1,7 @@
 import {ActionTypes, PostsDataType, profilePageType} from "../types";
-import {Contacts, Photos} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../components/api/api";
+import {UserResponse} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -54,11 +56,18 @@ export const updateNewPostTextActionCreator = (text: string) => {
         newText: text
     } as const
 }
-export const setUserProfileAC = (profile:string) => {
+export const setUserProfileAC = (profile:UserResponse | string) => {
     return {
         type: SET_USER_PROFILE,
         profile
     }
 }
-
+export const getProfileThunkCreator = (userId:number) => {
+    return (dispatch:Dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(responce => {
+                dispatch(setUserProfileAC(responce.data))
+            })
+    }
+}
 export default profileReducer;

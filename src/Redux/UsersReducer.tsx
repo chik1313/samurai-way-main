@@ -114,5 +114,28 @@ export const getUsersThunkCreator = (currentPage:number , pageSize:number) => {
         });
     }
 }
-
+export const followThunkCreator = (userId:number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingInProgressAC(true, userId))
+        usersAPI.follow(userId)
+            .then(responce => {
+                if (responce.data.resultCode === 0) {
+                    dispatch(followAC(userId));
+                }
+                dispatch(toggleFollowingInProgressAC(false, userId))
+            })
+    }
+}
+export const unfollowThunkCreator = (userId:number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingInProgressAC(false, userId))
+        usersAPI.unfollow(userId)
+            .then(responce => {
+                if (responce.data.resultCode === 0) {
+                    dispatch(unfollowAC(userId));
+                }
+                dispatch(toggleFollowingInProgressAC(false, userId))
+            })
+    }
+}
 export default usersReducer;

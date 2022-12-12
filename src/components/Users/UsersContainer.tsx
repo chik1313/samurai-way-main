@@ -4,20 +4,22 @@ import UsersAPIComponent from "./UsersAPIComponent";
 import {AllStateType} from "../../Redux/redux-store";
 import {
     followAC,
+    followThunkCreator,
     getUsersThunkCreator,
     setCurrentPageAC,
     toggleFollowingInProgressAC,
-    unfollowAC
+    unfollowAC,
+    unfollowThunkCreator
 } from "../../Redux/UsersReducer";
-import {UsersDataType} from "../../types";
 import {compose} from "redux";
 
 type DispatchPropsType = {
     followAC: (userID: number) => void,
     unfollowAC: (userID: number) => void,
     setCurrentPageAC: (currentPage: number) => void,
-    toggleFollowingInProgressAC: (isFetching: boolean, userId: number) => void,
     getUsersThunkCreator:(currentPage:number , pageSize:number) => void
+    followThunkCreator:(userId:number) => void
+    unfollowThunkCreator:(userId:number) => void
 
 }
 export type MapStateToPropsType = ReturnType<typeof mapStateToPropsType>
@@ -42,5 +44,7 @@ export default compose<ComponentType>(
         unfollowAC,
         setCurrentPageAC,
         toggleFollowingInProgressAC,
-        getUsersThunkCreator
+        getUsersThunkCreator,
+        followThunkCreator,
+        unfollowThunkCreator
     }))(UsersAPIComponent)

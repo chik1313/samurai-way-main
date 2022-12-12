@@ -1,12 +1,11 @@
-import React, {Component, ComponentType, ReactNode} from "react";
+import React, {Component, ComponentType} from "react";
 import s from './Profile.module.css'
-import axios from "axios";
 import {connect} from "react-redux";
 import {AllStateType} from "../../Redux/redux-store";
 import {compose} from "redux";
 import Profile from "./Profile";
-import {setUserProfileAC} from "../../Redux/ProfileReducer";
-import {useParams} from "react-router-dom";
+import {getProfileThunkCreator} from "../../Redux/ProfileReducer";
+import {Navigate, useParams} from "react-router-dom";
 
 
 export interface Contacts {
@@ -38,6 +37,8 @@ type PropsType = {
     setUserProfileAC:(profile:UserResponse)=>void
     profile:UserResponse
     params:{userId:number } | undefined
+    getProfileThunkCreator:(userId:number) => void
+    isAuth:boolean
 }
 
 export function withRouter(Children:any){
@@ -53,13 +54,11 @@ class ProfileContainer extends Component<PropsType> {
         if (!userId) {
             userId = 2;
         }
-        axios.get<UserResponse>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(responce => {
-                this.props.setUserProfileAC(responce.data)
-            })
+        this.props.getProfileThunkCreator(userId)
         }
 
     render() {
+        if (this.props.isAuth === false) return <Navigate to={"/login"}/>
         return (
             <div className={s.content}>
                 <Profile profile={this.props.profile}/>
@@ -69,12 +68,13 @@ class ProfileContainer extends Component<PropsType> {
 
 let mapStateToProps = (state: AllStateType) => {
     return {
-        profile:state.profilePage.profile
+        profile:state.profilePage.profile,
+        isAuth:state.auth.isAuth
     }
 }
 
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 export default compose<ComponentType>(
-connect(mapStateToProps , {setUserProfileAC})
+connect(mapStateToProps , {getProfileThunkCreator})
 ) (WithUrlDataContainerComponent);
