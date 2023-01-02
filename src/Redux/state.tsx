@@ -11,14 +11,15 @@ export let store: StoreType = {
                 {id: 2, message: "Hello,it's my first post!", likesCount: 15}
             ],
             newPostText: 'it-kamasutra.com',
-            profile: null
+            profile: null,
+            status: ""
 
         },
         messagesPage: {
             dialogsData: [
                 {id: 1, name: "Vladich"},
                 {id: 2, name: "Natali"},
-                {id: 3, name: "Alex"},
+                {id: 3, name: "Romich"},
                 {id: 4, name: "Alex"},
                 {id: 5, name: "KaLkalych"}
             ],

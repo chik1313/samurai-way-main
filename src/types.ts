@@ -1,3 +1,5 @@
+import {setStatusAC} from "./Redux/ProfileReducer";
+
 export type PostsDataType = {
     id: number,
     message: string,
@@ -23,7 +25,8 @@ export type UsersDataType = {
 export type profilePageType = {
     postsData: Array<PostsDataType>,
     newPostText: string
-    profile:any
+    profile:any,
+    status:any
 }
 export type usersPageType = {
     users: Array<UsersDataType>,
@@ -119,7 +122,11 @@ type setUsersDataType = {
         isAuth:boolean
     }
 }
-export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress;
+type setStatusType = {
+    type: "SET_STATUS",
+    status:any
+}
+export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress | setStatusType ;
 
 
 export type addMessageType = {

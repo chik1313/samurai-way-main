@@ -12,6 +12,7 @@ import {
     unfollowThunkCreator
 } from "../../Redux/UsersReducer";
 import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type DispatchPropsType = {
     followAC: (userID: number) => void,
@@ -39,6 +40,7 @@ const mapStateToPropsType = (state: AllStateType) => {
 }
 
 export default compose<ComponentType>(
+    withAuthRedirect,
     connect(mapStateToPropsType, {
         followAC,
         unfollowAC,

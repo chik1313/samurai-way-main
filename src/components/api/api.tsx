@@ -29,7 +29,8 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`)
     },
     getProfile(userId:number) {
-        return instance.get<UserResponse>(`profile/` + userId)
+        console.warn("Obsolete method . P `` ")
+        return profileAPI.getProfile(userId)
     }
 
 }
@@ -38,4 +39,17 @@ export const authAPI = {
         return instance.get(`auth/me`)
     }
 }
+
+export const profileAPI = {
+    getProfile(userId:number) {
+        return instance.get(`profile/` + userId )
+    },
+    getStatus(userId:number) {
+        return instance.get(`profile/status/` + userId)
+    },
+    updateStatus(status:any) {
+return instance.put(`profile/status` , {status:status})
+    }
+}
+
 

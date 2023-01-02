@@ -16,7 +16,7 @@ let initialState = {
     dialogsData: [
         {id: 1, name: "Vladich"},
         {id: 2, name: "Natali"},
-        {id: 3, name: "Alex"},
+        {id: 3, name: "Romich"},
         {id: 4, name: "Alex"},
         {id: 5, name: "KaLkalych"}
     ] as Array<dialogsDataType>,
