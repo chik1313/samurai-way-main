@@ -1,52 +1,48 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
-type PropsType = {
-    status:string
-    updateStatus: (status:any)=> void
-}
-const ProfileStatus = (props:PropsType) => {
-    let [editMode,setEditMode] = useState(false)
-    let [status,setStatus ] = useState(props.status)
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
-    const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+type PropsType = {
+    status: string
+    updateStatus: (status: any) => void
+}
+const ProfileStatus = (props: PropsType) => {
+    let [editMode, setEditMode] = useState(false)
+    let [status, setStatus] = useState(props.status)
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const newStatus = e.currentTarget.value
         setStatus(newStatus)
 
     }
-    const activateEditMode = ()=> {
+    const activateEditMode = () => {
         setEditMode(true)
     }
     const reActivateEditMode = () => {
         setEditMode(false)
         props.updateStatus(status)
     }
-   /* let reActivateEditMode;
-    useEffect(()=>{
-        reActivateEditMode = () => {
-            setEditMode(false)
-            props.updateStatus(status)
-        }
-    },[status])*/
-   const onKeyPressActivateEditMode = (e:KeyboardEvent<HTMLInputElement>) => {
-        if(e.charCode === 13) {
+    const onKeyPressActivateEditMode = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.charCode === 13) {
             setEditMode(false)
             props.updateStatus(status)
         }
     }
 
-
     return (
         <>
             {!editMode ?
                 <div>
-                    <span onDoubleClick={activateEditMode} >{ props.status || "no status"}</span>
+                    <span onDoubleClick={activateEditMode}>{props.status || "no status"}</span>
                 </div>
 
-             :   <div>
+                : <div>
                     <input type="text"
                            autoFocus={true}
                            onBlur={reActivateEditMode}
                            onKeyPress={onKeyPressActivateEditMode}
-                           onChange={onChangeHandler}/>
+                           onChange={onChangeHandler}
+                           value={status}
+                    />
+
                 </div>
             }
         </>
