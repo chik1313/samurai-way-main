@@ -1,6 +1,5 @@
 import {StoreType} from "../types";
 import ProfileReducer from "./ProfileReducer";
-import dialogsReducer from "./dialogsReducer";
 
 
 export let store: StoreType = {
@@ -10,7 +9,6 @@ export let store: StoreType = {
                 {id: 1, message: "Hi,how are you?", likesCount: 14},
                 {id: 2, message: "Hello,it's my first post!", likesCount: 15}
             ],
-            newPostText: 'it-kamasutra.com',
             profile: null,
             status: ""
 
@@ -29,7 +27,6 @@ export let store: StoreType = {
                 {id: 3, message: "Kal kalych"},
                 {id: 4, message: "How are you"}
             ],
-            newMessageText: ""
         }
     },
     getState() {
@@ -45,7 +42,7 @@ export let store: StoreType = {
     dispatch(action) {
 
         this._state.profilePage = ProfileReducer( this._state.profilePage,action)
-        this._state.messagesPage = dialogsReducer( this._state.messagesPage,action)
+        /*this._state.messagesPage = dialogsReducer( this._state.messagesPage,action)*/
         this.callSubscriber();
     }
 }

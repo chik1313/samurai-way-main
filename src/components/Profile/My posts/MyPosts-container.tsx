@@ -1,5 +1,5 @@
-import React, {ChangeEvent} from "react";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/ProfileReducer";
+import React from "react";
+import {addPostActionCreator} from "../../../Redux/ProfileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -7,25 +7,20 @@ import {AllStateType} from "../../../Redux/redux-store";
 
 
 type DispatchPropsType = {
-    addPost: () => void,
-    onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    addPost: (newPostText:string) => void,
+
 }
 
 const mapStateToProps = (state:AllStateType) => {
     return {
         postsData: state.profilePage.postsData,
-        newPostText:state.profilePage.newPostText
+        /*newPostText:state.profilePage.newPostText*/
     }
 }
 const mapDispatchToProps = (dispatch:Dispatch):DispatchPropsType => {
     return {
-        addPost: () => {
-
-            dispatch(addPostActionCreator())
-        },
-        onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            let text = e.currentTarget.value
-            dispatch(updateNewPostTextActionCreator(text))
+        addPost: (newPostText:string) => {
+            dispatch(addPostActionCreator(newPostText))
         }
     }
 }

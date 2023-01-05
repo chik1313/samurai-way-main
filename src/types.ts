@@ -1,5 +1,3 @@
-import {setStatusAC} from "./Redux/ProfileReducer";
-
 export type PostsDataType = {
     id: number,
     message: string,
@@ -24,7 +22,6 @@ export type UsersDataType = {
 }
 export type profilePageType = {
     postsData: Array<PostsDataType>,
-    newPostText: string
     profile:any,
     status:any
 }
@@ -45,7 +42,7 @@ export type authPageType = {
 export type messagesPageType = {
     dialogsData: Array<dialogsDataType>,
     messagesData: Array<messagesDataType>,
-    newMessageText: string
+
 }
 
 export type StateType = {
@@ -62,7 +59,7 @@ export type StoreType = {
 
 type AddPostType = {
     type:'ADD-POST',
-    newPost:string
+    newPostText:string
 
 }
 type UpdateNewPostTextType = {
@@ -76,7 +73,7 @@ type UpdateNewMessageTextType = {
 
 type SendMessageType = {
     type:"SEND-MESSAGE",
-
+    newMessageBody: string
 }
 type followType = {
     type: "FOLLOW",

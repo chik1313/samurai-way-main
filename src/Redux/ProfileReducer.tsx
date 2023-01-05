@@ -14,7 +14,7 @@ let initialState:profilePageType = {
             {id: 1, message: "Hi,how are you?", likesCount: 14},
             {id: 2, message: "Hello,it's my first post!", likesCount: 15}
         ],
-        newPostText: 'it-kamasutra.com',
+
      profile: null,
     status:""
 };
@@ -24,18 +24,13 @@ const profileReducer = (state=initialState, action:ActionTypes) => {
         case ADD_POST: {
             let addPost: PostsDataType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 postsData:[...state.postsData, addPost],
                 newPostText: ''
-            };
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return  {...state,
-            newPostText: action.newText
             };
         }
         case "SET_USER_PROFILE": {
@@ -53,9 +48,10 @@ const profileReducer = (state=initialState, action:ActionTypes) => {
         }
     }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostText:string) => {
     return {
         type: ADD_POST,
+        newPostText
     } as const
 }
 
