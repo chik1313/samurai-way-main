@@ -47,3 +47,12 @@ export const getAuthUsersData = () => {
             })
     }
 }
+
+export const login = (email:string , password:string , rememberMe:boolean) => {
+    return (dispatch:Dispatch) => {
+authAPI.login()
+    }
+}
+
+
+
