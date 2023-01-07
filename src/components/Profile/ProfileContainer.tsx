@@ -42,6 +42,7 @@ type PropsType = {
     getStatus:(userId:number) => void
     status:any
     updateStatus: (status:any)=> void
+    authorizedUserId: number
 
 }
 
@@ -56,7 +57,7 @@ class ProfileContainer extends Component<PropsType> {
     componentDidMount() {
         let userId = this.props.params?.userId;
         if (!userId) {
-            userId = 26367;
+            userId = this.props.authorizedUserId;
         }
         this.props.getProfileThunkCreator(userId)
         this.props.getStatus(userId);
@@ -75,7 +76,9 @@ class ProfileContainer extends Component<PropsType> {
 let mapStateToProps = (state: AllStateType) => {
     return {
         profile:state.profilePage.profile,
-        status:state.profilePage.status
+        status:state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth:state.auth.isAuth
     }
 }
 

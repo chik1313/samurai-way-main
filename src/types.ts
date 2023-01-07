@@ -1,3 +1,5 @@
+import {FormAction} from "redux-form/lib/actions";
+
 export type PostsDataType = {
     id: number,
     message: string,
@@ -112,7 +114,7 @@ type setUserProfileType = {
 
 type setUsersDataType = {
     type: "SET_USER_DATA",
-    data: {
+    payload: {
         userId:string,
         email:string,
         login:string
