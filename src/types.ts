@@ -125,7 +125,11 @@ type setStatusType = {
     type: "SET_STATUS",
     status:any
 }
-export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress | setStatusType ;
+type InitializedType = {
+    type: "SET_INITIALIZED"
+}
+export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress | setStatusType | InitializedType;
+
 
 
 export type addMessageType = {

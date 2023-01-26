@@ -21,8 +21,10 @@ export type InitialStateType = typeof initialState;
 export const authReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
+
             return {
                 ...state,
+                id:action.payload.userId,
                 ...action.payload,
 
             }
@@ -33,22 +35,22 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 }
 
 export const setAuthUserDataAC = (userId:string | null, email:string | null, login:string | null, isAuth:boolean) => {
+    console.log(userId)
     return {
         type: SET_USER_DATA,
         payload: { userId, email , login , isAuth }
     }
 }
 
-export const getAuthUsersData = () => {
-    return (dispatch:Dispatch) => {
-        authAPI.me()
+export const getAuthUsersData = () => (dispatch:Dispatch) => {
+         return  authAPI.me()
             .then(response => {
+                console.log(response)
                 if (response.data.resultCode === 0) {
                     let {id , email , login } = response.data.data;
                     dispatch(setAuthUserDataAC(id , email , login , true))
                 }
             })
-    }
 }
 
 export const login = (email:string , password:string , rememberMe:boolean) => {

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 
 type PropsType = {
     status: string
@@ -7,7 +7,9 @@ type PropsType = {
 const ProfileStatus = (props: PropsType) => {
     let [editMode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status)
-
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const newStatus = e.currentTarget.value
         setStatus(newStatus)

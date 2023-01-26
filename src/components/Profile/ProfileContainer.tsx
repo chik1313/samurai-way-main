@@ -43,6 +43,7 @@ type PropsType = {
     status:any
     updateStatus: (status:any)=> void
     authorizedUserId: number
+    history: [string]
 
 }
 
@@ -58,6 +59,9 @@ class ProfileContainer extends Component<PropsType> {
         let userId = this.props.params?.userId;
         if (!userId) {
             userId = this.props.authorizedUserId;
+        }
+        if (!userId) {
+            this.props.history.push("/login")
         }
         this.props.getProfileThunkCreator(userId)
         this.props.getStatus(userId);
