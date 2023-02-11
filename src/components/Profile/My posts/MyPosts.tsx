@@ -8,23 +8,19 @@ import {maxLengthCreator, requiredField} from "../../../utils/validators/validat
 import Textarea from "../../common/FormsControlls/FormsControls";
 
 
-type PropsType = {
-    postsData: Array<PostsDataType>
-    newPostText:string
-    addPost:()=>void
-    onPostChange:(e:ChangeEvent<HTMLTextAreaElement>)=>void
-}
 
-let MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo(function (props: MyPostsPropsType) {
+    console.log('render')
+
     let postsElement = props.postsData.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
-    let addPost = (values:TextAreaType) => {
+    let addPost = (values: TextAreaType) => {
         props.addPost(values.newPostText);
 
     }
- /*   let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.onPostChange(e);
-    }*/
+    /*   let onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+           props.onPostChange(e);
+       }*/
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
@@ -34,7 +30,8 @@ let MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     );
-}
+});
+
 type TextAreaType = {
     newPostText:string
 }
