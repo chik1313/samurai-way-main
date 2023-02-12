@@ -1,9 +1,17 @@
 .item {
-    color: navajowhite ;
+    position: relative;
+    color: #fff;
+    border: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    align-items: start;
+    margin: 5px;
+    background-color: #7c96cf;
 }
 
 .item img {
     width: 30px;
     height: 30px;
-    border-radius: 10px;
+
 }

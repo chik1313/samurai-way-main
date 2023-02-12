@@ -30,7 +30,6 @@ export const initializedAC = () => {
     }as const
 }
 export const initializedApp = () => (dispatch:ThunkDispatch<AllStateType, void, ActionTypes | FormAction >) => {
-    console.log('kakakaka')
     dispatch(getAuthUsersData())
         .then((reds)=> {
             console.log(reds)

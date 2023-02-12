@@ -3,9 +3,7 @@ import style from "./Users.module.css";
 import userPhoto from "../../assets/images/image.png";
 import {UsersDataType} from "../../types";
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {usersAPI} from "../api/api";
-import {followThunkCreator} from "../../Redux/UsersReducer";
+import {Button} from "@mui/material";
 
 type PropsUsersType = {
     pageSize: number,
@@ -25,7 +23,7 @@ const Users = (props: PropsUsersType) => {
     for (let i = 1; i <= pagesCount; i++) {
         totalPages.push(i);
     }
-    console.log(props.followingInProgress)
+
     return (
         <div>
             <div>
@@ -51,19 +49,19 @@ const Users = (props: PropsUsersType) => {
                     <div>
                         {u.followed
                         ?
-                        <button
+                        <Button variant='outlined' size='small'
                             disabled={props.followingInProgress.some(id=>id===u.id)}
                             onClick={() => {props.unfollowThunkCreator(u.id)}}
                         >
                             UNFOLLOW
-                        </button>
+                        </Button>
                         :
-                        <button
+                        <Button variant='outlined' size='small'
                             disabled={props.followingInProgress.some(id=>id===u.id)}
                             onClick={() => {props.followThunkCreator(u.id)}}
                         >
                             FOLLOW
-                        </button>
+                        </Button>
 
                     }
                         </div>

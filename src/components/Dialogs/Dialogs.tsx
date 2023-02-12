@@ -6,6 +6,7 @@ import {DialogsPropsType} from "./Dialogs-container";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../utils/validators/validators";
 import Textarea from "../common/FormsControlls/FormsControls";
+import {Button} from "@mui/material";
 
 const Dialogs = (props: DialogsPropsType) => {
 
@@ -43,7 +44,7 @@ const AddMessageForm:React.FC<InjectedFormProps<InputType>> = (props) => {
                        validate={[requiredField , maxField50]}
                 />
                 <div>
-                    <button>Send</button>
+                    <Button variant='outlined' size='small'>Send </Button>
                 </div>
             </div>
         </form>

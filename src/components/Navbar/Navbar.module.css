@@ -1,12 +1,17 @@
 .nav {
+    font-family: Rubik;
     grid-area: n;
-    background-color: #efcec9;
+    background-color: #003b46;
     padding: 20px;
+
 }
 
 .item a {
     color: dimgray;
     text-decoration: none;
+    margin: 10px;
+    font-size: 20px;
+
 }
 
 .item a.activeLink {

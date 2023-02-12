@@ -1,4 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
+import {TextField} from "@mui/material";
+import s from './ProfileStatus.module.css'
 
 type PropsType = {
     status: string
@@ -30,14 +32,14 @@ const ProfileStatus = (props: PropsType) => {
     }
 
     return (
-        <>
+        <div className={s.status}>
             {!editMode ?
                 <div>
                     <span onDoubleClick={activateEditMode}>{props.status || "no status"}</span>
                 </div>
 
                 : <div>
-                    <input type="text"
+                    <TextField type="text"
                            autoFocus={true}
                            onBlur={reActivateEditMode}
                            onKeyPress={onKeyPressActivateEditMode}
@@ -47,7 +49,7 @@ const ProfileStatus = (props: PropsType) => {
 
                 </div>
             }
-        </>
+        </div>
     );
 };
 

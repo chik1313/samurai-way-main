@@ -19,13 +19,13 @@ export let store: StoreType = {
                 {id: 2, name: "Natali"},
                 {id: 3, name: "Romich"},
                 {id: 4, name: "Alex"},
-                {id: 5, name: "KaLkalych"}
+                {id: 5, name: "Vladyslav"}
             ],
             messagesData: [
                 {id: 1, message: "Hey"},
                 {id: 2, message: "How are you"},
-                {id: 3, message: "Kal kalych"},
-                {id: 4, message: "How are you"}
+                {id: 3, message: "I'm fine"},
+                {id: 4, message: "Holla!!"}
             ],
         }
     },

@@ -12,7 +12,9 @@ const SET_STATUS = "SET_STATUS"
 let initialState:profilePageType = {
         postsData: [
             {id: 1, message: "Hi,how are you?", likesCount: 14},
-            {id: 2, message: "Hello,it's my first post!", likesCount: 15}
+            {id: 2, message: "Hello,it's my first post!", likesCount: 15},
+            {id: 3, message: "Hello,it's my first post!", likesCount: 25},
+            {id: 4, message: "Hello,it's my first post!", likesCount: 35},
         ],
 
      profile: null,

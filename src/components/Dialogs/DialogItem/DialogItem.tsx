@@ -7,8 +7,8 @@ import {dialogsDataType} from "../../../Redux/dialogsReducer";
 const DialogItem = (props: dialogsDataType) => {
     let path = "/Dialogs/" + props.id;
     return (
-        <div className={s.dialog + " " + s.active}>
-            <NavLink to={path}>{props.name}</NavLink>
+        <div className={s.dialogs + " " + s.active}>
+            <a href={''}>{props.name}</a>
         </div>
     )
 }

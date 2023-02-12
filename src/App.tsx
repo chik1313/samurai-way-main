@@ -12,8 +12,6 @@ import {compose} from "redux";
 import {initializedApp} from "./Redux/app-reducer";
 import {AllStateType} from "./Redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import {log} from "util";
-import {getAuthUsersData} from "./Redux/auth-reducer";
 
 type PropsType = {
     getAuthUsersData: () => void,

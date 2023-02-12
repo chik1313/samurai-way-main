@@ -17,13 +17,13 @@ let initialState = {
         {id: 2, name: "Natali"},
         {id: 3, name: "Romich"},
         {id: 4, name: "Alex"},
-        {id: 5, name: "KaLkalych"}
+        {id: 5, name: "Vladyslav"}
     ] as Array<dialogsDataType>,
     messagesData: [
         {id: 1, message: "Hey"},
         {id: 2, message: "How are you"},
-        {id: 3, message: "Kal kalych"},
-        {id: 4, message: "How are you"}
+        {id: 3, message: "Holla!"},
+        {id: 4, message: "Have a nice day!"}
     ] as Array<messagesDataType>,
 
 }

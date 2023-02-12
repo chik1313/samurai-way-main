@@ -23,9 +23,6 @@ let Nav = () => {
                 <a>News</a>
             </div>
             <div className={s.item}>
-                <a>News</a>
-            </div>
-            <div className={s.item}>
                 <a>Music</a>
             </div>
             <div className={s.item}>
