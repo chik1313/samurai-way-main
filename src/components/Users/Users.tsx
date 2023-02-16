@@ -1,9 +1,8 @@
 import React from 'react';
-import style from "./Users.module.css";
-import userPhoto from "../../assets/images/image.png";
 import {UsersDataType} from "../../types";
-import {NavLink} from 'react-router-dom';
-import {Button} from "@mui/material";
+import {Paginator} from "../common/Paginator/Paginator";
+import User from "./User";
+import {number} from "yup";
 
 type PropsUsersType = {
     pageSize: number,
@@ -26,53 +25,13 @@ const Users = (props: PropsUsersType) => {
 
     return (
         <div>
+            <Paginator pageSize={props.pageSize} totalUsersCount={props.totalUsersCount} currentPage={props.currentPage} onPageChange={props.onPageChange} portionSize={10}/>
             <div>
-                {totalPages.map(page => {
-                    return (
-                        <span className={props.currentPage === page ? style.selectedPage : ""}
-                              onClick=
-                                  {(e) => {
-                                      props.onPageChange(page)
-                                  }}> {page} </span>
-                    )
-                })}
-
+            {props.users.map(u =>
+                <User key={u.id} user={u} followingInProgress={props.followingInProgress} followThunkCreator={props.followThunkCreator} unfollowThunkCreator={props.unfollowThunkCreator}/>)}
             </div>
-            {props.users.map(u => <div key={u.id}>
-                <span>
-                    <div>
-                        <NavLink to={'/Profile/' + u.id}>
-                        <img src={u.photos.small != null ? u.photos.small : userPhoto}
-                             className={style.userPhoto} alt=''/>
-                        </NavLink>
-                    </div>
-                    <div>
-                        {u.followed
-                        ?
-                        <Button variant='outlined' size='small'
-                            disabled={props.followingInProgress.some(id=>id===u.id)}
-                            onClick={() => {props.unfollowThunkCreator(u.id)}}
-                        >
-                            UNFOLLOW
-                        </Button>
-                        :
-                        <Button variant='outlined' size='small'
-                            disabled={props.followingInProgress.some(id=>id===u.id)}
-                            onClick={() => {props.followThunkCreator(u.id)}}
-                        >
-                            FOLLOW
-                        </Button>
-
-                    }
-                        </div>
-                </span>
-                <span>
-                    <span><div>{u.name}</div><div>{u.status}</div></span>
-                    <span><div>{"u.location.country"}</div><div>{"u.location.city"}</div></span>
-                </span>
-            </div>)}
         </div>
-    );
-};
+    )
+}
 
 export default Users;

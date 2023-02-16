@@ -12,6 +12,7 @@ import {compose} from "redux";
 import {initializedApp} from "./Redux/app-reducer";
 import {AllStateType} from "./Redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import Footer from "./components/Footer/Footer";
 
 type PropsType = {
     getAuthUsersData: () => void,
@@ -42,6 +43,7 @@ class App extends React.Component<PropsType> {
                         <Route path="/login" element={<Login/>}/>
                     </Routes>
                 </div>
+                <Footer/>
             </div>);
     }
 }

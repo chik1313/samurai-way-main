@@ -13,8 +13,8 @@ let initialState:profilePageType = {
         postsData: [
             {id: 1, message: "Hi,how are you?", likesCount: 14},
             {id: 2, message: "Hello,it's my first post!", likesCount: 15},
-            {id: 3, message: "Hello,it's my first post!", likesCount: 25},
-            {id: 4, message: "Hello,it's my first post!", likesCount: 35},
+            {id: 3, message: "Hey Hey ,it's my new post!", likesCount: 25},
+            {id: 4, message: "Holla ,have a nice Day!", likesCount: 35},
         ],
 
      profile: null,
@@ -76,12 +76,10 @@ export const setStatusAC = (status:any) => {
     }
 }
 export const getProfileThunkCreator = (userId:number) => {
-    return (dispatch:Dispatch) => {
-        usersAPI.getProfile(userId)
-            .then(responce => {
+    return async (dispatch:Dispatch) => {
+        let responce = await usersAPI.getProfile(userId)
                 dispatch(setUserProfileAC(responce.data))
-            })
-    }
+               }
 }
 
 export const getStatus = (userId:number) => {

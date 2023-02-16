@@ -1,5 +1,5 @@
 import axios from "axios";
-import {UserResponse} from "../Profile/ProfileContainer";
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -29,7 +29,6 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`)
     },
     getProfile(userId:number) {
-        console.warn("Obsolete method . P `` ")
         return profileAPI.getProfile(userId)
     }
 
@@ -47,8 +46,8 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userId:number) {
-        return instance.get(`profile/` + userId )
+    getProfile (userId:number) {
+        return instance.get(`profile/${userId}`)
     },
     getStatus(userId:number) {
         return instance.get(`profile/status/` + userId)

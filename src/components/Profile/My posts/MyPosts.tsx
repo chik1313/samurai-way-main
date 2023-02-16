@@ -10,7 +10,7 @@ import {Button} from "@mui/material";
 
 const MyPosts = React.memo(function (props: MyPostsPropsType) {
 
-    let postsElement = props.postsData.map(p => <Post  message={p.message} likesCount={p.likesCount}/>);
+    let postsElement = props.postsData.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
     let addPost = (values: TextAreaType) => {
         props.addPost(values.newPostText);
@@ -22,7 +22,7 @@ const MyPosts = React.memo(function (props: MyPostsPropsType) {
             <h3>My posts</h3>
             <AddNewPostFormRedux onSubmit={addPost}/>
             </div>
-            <div>
+            <div className={s.posts}>
                 {postsElement}
             </div>
         </div>
@@ -40,7 +40,7 @@ const AddNewPostForm:React.FC<InjectedFormProps<TextAreaType>> = (props) => {
             <Field name="newPostText" component={Textarea} validate={[requiredField , maxLength10]}/>
         </div>
         <div>
-            <Button variant='outlined' size='small' >Add post</Button>
+            <Button type='submit' variant='outlined' size='small'>Add post</Button>
         </div>
     </form>
     )

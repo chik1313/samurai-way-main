@@ -11,7 +11,7 @@ let Post:React.FC<MessageType> = (props) => {
 
     return (
         <div className={s.item}>
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/Soccer_ball.svg/2048px-Soccer_ball.svg.png"
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1150px-React-icon.svg.png"
                  alt=""/>
             {props.message}
             <div>

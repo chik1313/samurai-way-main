@@ -32,7 +32,7 @@ export const initializedAC = () => {
 export const initializedApp = () => (dispatch:ThunkDispatch<AllStateType, void, ActionTypes | FormAction >) => {
     dispatch(getAuthUsersData())
         .then((reds)=> {
-            console.log(reds)
+
             dispatch(initializedAC())
         })
 }

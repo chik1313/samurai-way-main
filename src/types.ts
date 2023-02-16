@@ -113,7 +113,7 @@ type setUserProfileType = {
 }
 
 type setUsersDataType = {
-    type: "SET_USER_DATA",
+    type: "auth/SET_USER_DATA",
     payload: {
         userId:string,
         email:string,
