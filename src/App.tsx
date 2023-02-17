@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Nav from "./components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/Dialogs-container";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer, {withRouter} from "./components/Profile/ProfileContainer";
@@ -36,7 +36,13 @@ class App extends React.Component<PropsType> {
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path="/dialogs" element={<DialogsContainer/>}/>
+                        <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                        <Route path={'/samurai-way-main'} element={<Navigate to={'/profile'}/>}/>
+                        <Route path='/dialogs' element={
+                            <Suspense fallback={<div><Preloader/></div>}>
+                                <DialogsContainer/>
+                            </Suspense>
+                        }/>
                         <Route path="/profile" element={<ProfileContainer/>}/>
                         <Route path="/profile/:userId" element={<ProfileContainer/>}/>
                         <Route path="/users" element={<UsersContainer/>}/>

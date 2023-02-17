@@ -11,7 +11,7 @@ type PropsUsersType = {
     portionSize: number
    }
 
-export const Paginator: FC<PropsUsersType> = ({totalUsersCount,pageSize,currentPage,onPageChange , portionSize = 10}) => {
+export const Paginator: FC<PropsUsersType> = ({totalUsersCount,pageSize,currentPage,onPageChange , portionSize} ) => {
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let totalPages = [];
     for (let i = 1; i <= pagesCount; i++) {
