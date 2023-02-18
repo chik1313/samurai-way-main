@@ -1,5 +1,9 @@
 .status {
-    font-size: 20px;
+    width: 200px;
+    font-size: 18px;
     color: dimgray;
+
+margin-top: 20px;
+    border-radius: 4px;
 
 }

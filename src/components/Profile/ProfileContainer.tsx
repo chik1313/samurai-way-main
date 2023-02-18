@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import {connect} from "react-redux";
 import {AllStateType} from "../../Redux/redux-store";
 import Profile from "./Profile";
-import {getProfileThunkCreator, getStatus, updateStatus} from "../../Redux/ProfileReducer";
+import {getProfileThunkCreator, getStatus, savePhoto, updateStatus} from "../../Redux/ProfileReducer";
 import {useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -35,27 +35,29 @@ export type UserResponse = {
     photos: Photos;
 }
 type PropsType = {
-    setUserProfileAC:(profile:UserResponse)=>void
-    profile:UserResponse
-    params:{userId:number } | undefined
-    getProfileThunkCreator:(userId:number) => void
-    getStatus:(userId:number) => void
-    status:any
-    updateStatus: (status:any)=> void
+    setUserProfileAC: (profile: UserResponse) => void
+    profile: UserResponse
+    params: { userId: number } | undefined
+    getProfileThunkCreator: (userId: number) => void
+    getStatus: (userId: number) => void
+    status: any
+    updateStatus: (status: any) => void
     authorizedUserId: number
     history: [string]
+    savePhoto: (file:File) => void
 
 }
 
-export function withRouter(Children:any){
-    return(props:any)=>{
+export function withRouter(Children: any) {
+    return (props: any) => {
         const params = useParams()
-        return <Children {...props}  params={params}/>
+        return <Children {...props} params={params}/>
     }
 }
 
+
 class ProfileContainer extends Component<PropsType> {
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.params?.userId;
         if (!userId) {
             userId = this.props.authorizedUserId;
@@ -65,13 +67,28 @@ class ProfileContainer extends Component<PropsType> {
         }
         this.props.getProfileThunkCreator(userId)
         this.props.getStatus(userId);
+    }
+
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+   componentDidUpdate(prevProps: Readonly<PropsType>) {
+        if (this.props.params?.userId !== prevProps.params?.userId) {
+            this.refreshProfile()
         }
+   }
+
 
     render() {
 
         return (
             <div className={s.content}>
-                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}
+                <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                         updateStatus={this.props.updateStatus}
+                         isOwner={!this.props.params?.userId}
+                         savePhoto={this.props.savePhoto}
                 />
             </div>);
     }
@@ -79,16 +96,16 @@ class ProfileContainer extends Component<PropsType> {
 
 let mapStateToProps = (state: AllStateType) => {
     return {
-        profile:state.profilePage.profile,
-        status:state.profilePage.status,
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
         authorizedUserId: state.auth.id,
-        isAuth:state.auth.isAuth
+        isAuth: state.auth.isAuth
     }
 }
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps,{getProfileThunkCreator , getStatus , updateStatus}),
+    connect(mapStateToProps, {getProfileThunkCreator, getStatus, updateStatus,savePhoto}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

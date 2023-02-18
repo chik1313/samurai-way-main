@@ -128,7 +128,12 @@ type setStatusType = {
 type InitializedType = {
     type: "SET_INITIALIZED"
 }
-export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress | setStatusType | InitializedType;
+type setPhotoType = {
+    type: "SAVE_PHOTO",
+    file:File
+}
+export type ActionTypes = AddPostType | UpdateNewPostTextType | UpdateNewMessageTextType | SendMessageType | followType | unfollowType | setusersType | setCurrentPageType | setTotalUsersCountType | ToggleIsFetchinType | setUserProfileType | setUsersDataType | FollowingInProgress | setStatusType | InitializedType | setPhotoType;
+
 
 
 

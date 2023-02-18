@@ -7,7 +7,7 @@ const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
-
+const SAVE_PHOTO = "SAVE_PHOTO"
 
 let initialState:profilePageType = {
         postsData: [
@@ -44,6 +44,12 @@ const profileReducer = (state=initialState, action:ActionTypes) => {
                 status:action.status
             }
         }
+        case "SAVE_PHOTO": {
+            return {
+                ...state,
+            profile:{...state.profile ,photos:action.file}
+            }
+        }
 
         default :
             return state;
@@ -75,6 +81,12 @@ export const setStatusAC = (status:any) => {
         status
     }
 }
+export const savePhotoAC = (file:File) => {
+    return {
+        type: SAVE_PHOTO,
+        file
+    }
+}
 export const getProfileThunkCreator = (userId:number) => {
     return async (dispatch:Dispatch) => {
         let responce = await usersAPI.getProfile(userId)
@@ -99,6 +111,17 @@ export const updateStatus = (status:any) => {
                     dispatch(setStatusAC(status))
                 }
             })
+    }
+}
+export const savePhoto = (file:File) => async (dispatch:Dispatch) => {
+    let res = await profileAPI.savePhoto(file)
+    try {
+        if (res.data.resultCode === 0) {
+            dispatch(savePhotoAC(res.data.data.photos))
+        }
+    }
+    finally {
+
     }
 }
 export default profileReducer;
