@@ -28,4 +28,4 @@ export const Input: FC<InputPropsType> = ({input, meta, ...props}) => {
     );
 };
 
-export default Textarea;
+export default Textarea

@@ -29,7 +29,7 @@ export type profilePageType = {
 }
 export type usersPageType = {
     users: Array<UsersDataType>,
-    pageSize:number
+    pageSize:number,
     totalUsersCount:number
     currentPage: number
     isFetching:boolean

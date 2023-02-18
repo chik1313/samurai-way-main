@@ -11,3 +11,8 @@
     border-radius:50%;
     padding:5px;
 }
+.contacts {
+    font-size: 15px;
+    opacity: 0.5;
+    padding-left: 10px ;
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 import {UsersDataType} from "../../types";
-import {Paginator} from "../common/Paginator/Paginator";
+import { Pagination } from 'antd';
 import User from "./User";
-import {number} from "yup";
+
 
 type PropsUsersType = {
-    pageSize: number,
+    pageSize: number
     totalUsersCount: number
     currentPage: number
     users: Array<UsersDataType>,
@@ -17,15 +17,15 @@ type PropsUsersType = {
 }
 
 const Users = (props: PropsUsersType) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let totalPages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        totalPages.push(i);
-    }
+    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    // let totalPages = [];
+    // for (let i = 1; i <= pagesCount; i++) {
+    //     totalPages.push(i);
+    // }
 
     return (
         <div>
-            <Paginator pageSize={props.pageSize} totalUsersCount={props.totalUsersCount} currentPage={props.currentPage} onPageChange={props.onPageChange} portionSize={10}/>
+            <Pagination showSizeChanger={false} defaultCurrent={props.currentPage} total={props.totalUsersCount} onChange={props.onPageChange}/>
             <div>
             {props.users.map(u =>
                 <User key={u.id} user={u} followingInProgress={props.followingInProgress} followThunkCreator={props.followThunkCreator} unfollowThunkCreator={props.unfollowThunkCreator}/>)}

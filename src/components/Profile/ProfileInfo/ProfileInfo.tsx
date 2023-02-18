@@ -1,11 +1,12 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from "./ProfileInfo.module.css"
 import {UserResponse} from "../ProfileContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/image.png"
 import ProfileStatus from "./ProfileStatus";
-
 import {Button} from "@mui/material";
+import ProfileData from "./ProfileData";
+// import ProfileDataForm from "./ProfileDataForm";
 
 type PropsType = {
     profile: UserResponse
@@ -14,7 +15,10 @@ type PropsType = {
     isOwner: boolean
     savePhoto: (file: File) => void
 }
+
 const ProfileInfo = (props: PropsType) => {
+    const [editMode , setEditMode] = useState(false)
+
     if (!props.profile) {
         return <Preloader/>
     }
@@ -25,6 +29,7 @@ const ProfileInfo = (props: PropsType) => {
             props.savePhoto(event.target.files[0])
         }
     }
+
     return (
         <>
             <div className={s.DescriptionBlock}>
@@ -42,28 +47,12 @@ const ProfileInfo = (props: PropsType) => {
                         onChange={onMainPhotoSelected}
                     />
                 </Button>}
-                <div>
-                    <div><b>Full name : </b> {props.profile.fullName} </div>
-                    <div><b>Looking for a job </b>: {props.profile.lookingForAJob ? 'yes' : 'no'} </div>
-                    {props.profile.lookingForAJob &&
-                        <div><b>My professional skills : </b>{props.profile.lookingForAJobDescription} </div>
-                    }
-                    <div><b>About me </b>: {props.profile.aboutMe} </div>
-                    <div><b>About me </b>: {props.profile.aboutMe} </div>
-                </div>
+                {/*{editMode ? <ProfileDataForm profile={props.profile}/> : <ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}*/}
 
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </>
     )
 }
-type PropsType = {
-    contactTitle:string,
-    contactValue:string
-}
-const Contact:React.FC<PropsType> = ({contactTitle , contactValue}) => {
-    return {
 
-    }
-}
 export default ProfileInfo;

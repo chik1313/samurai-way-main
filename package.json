@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://chik1313.github.io/samurai-way-main",
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "^4.5.8",
@@ -13,7 +14,7 @@
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
     "@testing-library/user-event": "13.2.1",
-    "antd": "4.18.7",
+    "antd": "^5.2.1",
     "axios": "^1.1.3",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
