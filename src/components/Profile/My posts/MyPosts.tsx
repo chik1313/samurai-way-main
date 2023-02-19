@@ -10,7 +10,7 @@ import {Button} from "@mui/material";
 
 const MyPosts = React.memo(function (props: MyPostsPropsType) {
 
-    let postsElement = props.postsData.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+    let postsElement = props.postsData.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     let addPost = (values: TextAreaType) => {
         props.addPost(values.newPostText);

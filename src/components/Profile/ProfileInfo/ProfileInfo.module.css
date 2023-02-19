@@ -13,6 +13,18 @@
 }
 .contacts {
     font-size: 15px;
-    opacity: 0.5;
     padding-left: 10px ;
+}
+.formControl.error input,
+.formControl.error textarea {
+    border: 1px solid red;
+    outline: none;
+}
+.formControl.error span {
+    color: red;
+}
+.formSummaryError  {
+    border: 1px solid red;
+    padding: 5px;
+    color: red;
 }

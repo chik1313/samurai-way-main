@@ -1,5 +1,3 @@
-import {FormAction} from "redux-form/lib/actions";
-
 export type PostsDataType = {
     id: number,
     message: string,
@@ -36,7 +34,7 @@ export type usersPageType = {
     followingInProgress: number[]
 }
 export type authPageType = {
-    id: string | null
+    id: number
     email: string | null
     login: string | null
     isAuth:boolean
@@ -115,7 +113,7 @@ type setUserProfileType = {
 type setUsersDataType = {
     type: "auth/SET_USER_DATA",
     payload: {
-        userId:string,
+        userId:number,
         email:string,
         login:string
         isAuth:boolean

@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import {connect} from "react-redux";
 import {AllStateType} from "../../Redux/redux-store";
 import Profile from "./Profile";
-import {getProfileThunkCreator, getStatus, savePhoto, updateStatus} from "../../Redux/ProfileReducer";
+import {getProfileThunkCreator, getStatus, savePhoto, saveProfile, updateStatus} from "../../Redux/ProfileReducer";
 import {useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -32,7 +32,7 @@ export type UserResponse = {
     lookingForAJobDescription: string;
     fullName: string;
     userId: number;
-    photos: Photos;
+    photos?: any;
 }
 type PropsType = {
     setUserProfileAC: (profile: UserResponse) => void
@@ -45,6 +45,7 @@ type PropsType = {
     authorizedUserId: number
     history: [string]
     savePhoto: (file:File) => void
+    saveProfile:(data:UserResponse)=>void
 
 }
 
@@ -89,6 +90,7 @@ class ProfileContainer extends Component<PropsType> {
                          updateStatus={this.props.updateStatus}
                          isOwner={!this.props.params?.userId}
                          savePhoto={this.props.savePhoto}
+                         saveProfile={this.props.saveProfile}
                 />
             </div>);
     }
@@ -105,7 +107,7 @@ let mapStateToProps = (state: AllStateType) => {
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getProfileThunkCreator, getStatus, updateStatus,savePhoto}),
+    connect(mapStateToProps, {getProfileThunkCreator, getStatus, updateStatus,savePhoto,saveProfile}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

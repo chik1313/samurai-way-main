@@ -10,13 +10,14 @@ type PropsType = {
     updateStatus: (status:any)=> void
     isOwner:boolean
     savePhoto: (file:File) => void
+    saveProfile:(data:UserResponse)=>void
 }
 
 let Profile = (props:PropsType) => {
 
     return (
         <div className={s.content}>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner} savePhoto={props.savePhoto}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner} savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>
              <MyPostsContainer />
         </div>
     )

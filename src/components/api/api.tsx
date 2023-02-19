@@ -1,4 +1,5 @@
 import axios from "axios";
+import {UserResponse} from "../Profile/ProfileContainer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -61,8 +62,10 @@ return instance.put(`profile/status` , {status:status})
         return instance.put('profile/photo' , formData , {
             headers: {
                 'Content-Type' : 'multipart/form-data'
-            }
-        })
+            }})
+    },
+    saveProfile (profile:UserResponse) {
+return instance.put('profile' , profile)
     }
 }
 

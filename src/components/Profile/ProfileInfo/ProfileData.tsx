@@ -1,10 +1,7 @@
 import React from 'react';
 import {UserResponse} from "../ProfileContainer";
 import {Contact} from "./Contact";
-import {Button} from "antd";
-import {EditOutlined, EditTwoTone} from "@ant-design/icons";
-
-
+import {EditTwoTone} from "@ant-design/icons";
 
 
 type PropsType = {
@@ -22,9 +19,9 @@ const ProfileData = (props:PropsType) => {
             </div>}
             <div><b>Full name : </b> {props.profile.fullName} </div>
             <div><b>Looking for a job </b>: {props.profile.lookingForAJob ? 'yes' : 'no'} </div>
-            {props.profile.lookingForAJob &&
+
                 <div><b>My professional skills : </b>{props.profile.lookingForAJobDescription} </div>
-            }
+
             <div><b>About me </b>: {props.profile.aboutMe} </div>
             <div><b>Contacts </b>: {Object.entries(props.profile.contacts).map(elements => {
                 let keys = elements[0];

@@ -1,5 +1,43 @@
+.container {
+    align-items: center;
+    display: flex;
+    margin: 20px 20px 20px 50px;
+}
 .userPhoto{
     width: 100px;
     height: 100px;
+    padding: 7px;
+    text-align: center;
+    border-radius: 50%;
 }
 
+.userBlock {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 20px 5px 5px;
+}
+.userDescription {
+    border: 3px solid #1976d2;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: 600px;
+}
+.fontStyles {
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.userName {
+    font-weight: 700;
+    margin-right: 100px;
+}
+.fontPosition {
+    text-align: right;
+}
+.status {
+    font-size: 16px;
+    font-style: italic;
+}

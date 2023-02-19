@@ -1,33 +1,47 @@
 import React from 'react';
 import {UserResponse} from "../ProfileContainer";
-import {EditTwoTone} from "@ant-design/icons";
-import {Contact} from "./Contact";
 import {Input} from "../../common/FormsControlls/FormsControls";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import s from "./ProfileInfo.module.css";
 
-type PropsType = {
-    profile: UserResponse
-}
 
-const ProfileDataForm  = (props:PropsType) => {
+const ProfileDataForm:React.FC<InjectedFormProps<UserResponse>>  = ({handleSubmit,initialValues,error}) => {
+
     return (
-        <form>
-                <EditTwoTone onClick={()=>{}}  style={{marginLeft:"10px"}}
-                />
-            <div><b>Full name : </b> <Field placeholder={"Full name"} name={"fullName"} validate={[]} component={Input}/> </div>
-            <div><b>Looking for a job </b>: {props.profile.lookingForAJob ? 'yes' : 'no'} </div>
-            {props.profile.lookingForAJob &&
-                <div><b>My professional skills : </b>{props.profile.lookingForAJobDescription} </div>
-            }
-            <div><b>About me </b>: {props.profile.aboutMe} </div>
-            <div><b>Contacts </b>: {Object.entries(props.profile.contacts).map(elements => {
-                let keys = elements[0];
-                let value = elements[1];
-                return <Contact key={keys} contactTitle={keys} contactValue={value}/>
-            })} </div>
+        <form onSubmit={handleSubmit}>
+            <button>save</button>
+
+            <div>
+                <b>Full name : </b>
+                <Field placeholder={"Full name"} name={"fullName"} validate={[]} component={Input}/>
+            </div>
+            <div>
+                <b>Looking for a job </b>:
+                <Field placeholder={""} name={"lookingForAJob"} validate={[]} component={Input} type={'checkbox'}/>
+            </div>
+                <div>
+                    <b>My professional skills : </b>
+                    <Field placeholder={"My professional skills"} name={"lookingForAJobDescription"} validate={[]} component={Input}/>
+                </div>
+            <div>
+                <b>About me </b>:
+                <Field placeholder={"aboutMe"} name={"aboutMe"} validate={[]} component={Input} />
+            </div>
+            <div>
+                <b>Contacts </b>: {initialValues.contacts && Object.entries(initialValues.contacts).map(elements => {
+
+                    let keys = elements[0];
+                // let value = elements[1];
+                return <div className={s.contacts}>
+                    <b>{keys}:<Field placeholder={keys} name={"contacts."+keys} validate={[]} component={Input}/></b>
+                </div>
+            })}
+            </div>
+
+            {error && <div>{error}</div>}
         </form>
     );
 };
-// const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm)
-//
-// export default ProfileDataFormReduxForm;
+const ProfileDataFormReduxForm = reduxForm<UserResponse>({form: 'editProfile'})(ProfileDataForm)
+
+export default ProfileDataFormReduxForm;

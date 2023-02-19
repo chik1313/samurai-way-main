@@ -1,11 +1,12 @@
-import {applyMiddleware, combineReducers, compose, createStore, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./ProfileReducer";
 import usersReducer from "./UsersReducer";
 import {authReducer} from "./auth-reducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware, {ThunkAction} from "redux-thunk"
 import {reducer as formReducer} from 'redux-form'
 import {appReducer} from "./app-reducer";
+import {ActionTypes} from "../types";
 
 export type AllStateType = ReturnType<typeof rootReducer>
 
@@ -35,7 +36,10 @@ const enhancer = composeEnhancers(
     // other store enhancers if any
 );
 const store = createStore(rootReducer, enhancer);
+export type RootActionsType =
+    ActionTypes
 
+export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, AllStateType, unknown, RootActionsType>
 
 
 // @ts-ignore

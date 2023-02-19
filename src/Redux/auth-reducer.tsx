@@ -9,7 +9,7 @@ const SET_USER_DATA = "auth/SET_USER_DATA"
 
 
 let initialState: authPageType = {
-    id: null,
+    id: 26367,
     email: null,
     login: null,
     isAuth: false
@@ -20,7 +20,6 @@ export type InitialStateType = typeof initialState;
 export const authReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-
             return {
                 ...state,
                 id: action.payload.userId,
@@ -33,7 +32,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export const setAuthUserDataAC = (userId: string | null, email: string | null, login: string | null, isAuth: boolean) => {
+export const setAuthUserDataAC = (userId: number, email: string | null, login: string | null, isAuth: boolean) => {
 
     return {
         type: SET_USER_DATA,
@@ -62,7 +61,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => a
 export const logout = () => async (dispatch: Dispatch) => {
         let res = await authAPI.logout()
                 if (res.data.resultCode === 0) {
-                    dispatch(setAuthUserDataAC(null, null, null, false))
+                    dispatch(setAuthUserDataAC(0, null, null, false))
                 }
 }
 

@@ -15,8 +15,8 @@ type PropsUsersType = {
 
 const User = (props: PropsUsersType) => {
     return (
-        <div>
-            <span>
+        <div className={style.container}>
+            <div className={style.userBlock}>
                     <div>
                         <NavLink to={'/Profile/' + props.user.id}>
                         <img src={props.user.photos.small != null ? props.user.photos.small : userPhoto}
@@ -42,11 +42,17 @@ const User = (props: PropsUsersType) => {
 
                     }
                         </div>
-                </span>
-                <span>
-                    <span><div>{props.user.name}</div><div>{props.user.status}</div></span>
-                    <span><div>{"props.user.location.country"}</div><div>{"props.user.location.city"}</div></span>
-                </span>
+                </div>
+                <div className={style.userDescription}>
+                    <div  className={style.fontStyles}>
+                    <div className={style.userName}>{props.user.name}</div><div>{props.user.status}</div>
+                    <div>
+                        <div className={style.fontPosition}>{"props.user.location.country"}</div>
+                        <div className={style.fontPosition}>{"props.user.location.city"}</div>
+                    </div>
+                    </div>
+                    <div className={style.status}>Here will be your status speech: user.status</div>
+                </div>
             </div>
     )
 }

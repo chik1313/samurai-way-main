@@ -2,6 +2,9 @@ import {ActionTypes, PostsDataType, profilePageType} from "../types";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../components/api/api";
 import {UserResponse} from "../components/Profile/ProfileContainer";
+import {AllStateType, RootThunkType} from "./redux-store";
+import {FormAction, stopSubmit} from "redux-form";
+import {ThunkDispatch} from "redux-thunk";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT"
@@ -123,5 +126,15 @@ export const savePhoto = (file:File) => async (dispatch:Dispatch) => {
     finally {
 
     }
+}
+export const saveProfile = (profile:UserResponse): RootThunkType  => async (dispatch: ThunkDispatch<AllStateType, void, ActionTypes | FormAction>, getState) => {
+    const userId = getState().auth.id
+    const response = await profileAPI.saveProfile(profile)
+
+    if (response.data.resultCode === 0) {
+            dispatch(getProfileThunkCreator(userId))
+        } else {
+            dispatch(stopSubmit("editProfile", {_error: response.data.messages[0] }))
+        }
 }
 export default profileReducer;

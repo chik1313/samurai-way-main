@@ -6,7 +6,8 @@ import userPhoto from "../../../assets/images/image.png"
 import ProfileStatus from "./ProfileStatus";
 import {Button} from "@mui/material";
 import ProfileData from "./ProfileData";
-// import ProfileDataForm from "./ProfileDataForm";
+import ProfileDataFormReduxForm from "./ProfileDataForm";
+
 
 type PropsType = {
     profile: UserResponse
@@ -14,6 +15,7 @@ type PropsType = {
     updateStatus: (status: any) => void
     isOwner: boolean
     savePhoto: (file: File) => void
+    saveProfile:(profile:UserResponse)=>void
 }
 
 const ProfileInfo = (props: PropsType) => {
@@ -29,11 +31,15 @@ const ProfileInfo = (props: PropsType) => {
             props.savePhoto(event.target.files[0])
         }
     }
+    const onSubmit = (formData:UserResponse) => {
+        props.saveProfile(formData)
+        setEditMode(false)
+    }
 
     return (
         <>
             <div className={s.DescriptionBlock}>
-                <img src={props.profile.photos.large !== null ? props.profile.photos.large : userPhoto}
+                <img alt={'userPhoto'} src={props.profile.photos.large !== null ? props.profile.photos.large : userPhoto}
                      className={s.photoSize}/>
                 {props.isOwner && <Button
                     variant="outlined"
@@ -47,7 +53,9 @@ const ProfileInfo = (props: PropsType) => {
                         onChange={onMainPhotoSelected}
                     />
                 </Button>}
-                {/*{editMode ? <ProfileDataForm profile={props.profile}/> : <ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}*/}
+                {editMode
+                    ? <ProfileDataFormReduxForm initialValues={props.profile} onSubmit={onSubmit}/>
+                    : <ProfileData goToEditMode={()=>{setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
 
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
