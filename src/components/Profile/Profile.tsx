@@ -10,7 +10,7 @@ type PropsType = {
     updateStatus: (status:any)=> void
     isOwner:boolean
     savePhoto: (file:File) => void
-    saveProfile:(data:UserResponse)=>void
+    saveProfile:(profile:UserResponse)=>Promise<void>
 }
 
 let Profile = (props:PropsType) => {

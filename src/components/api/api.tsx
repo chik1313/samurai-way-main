@@ -10,7 +10,7 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers:(currentPage: number, pageSize: number) => {
+    getUsers: (currentPage: number, pageSize: number) => {
         return (
             instance.get(
                 `users?page=${currentPage}&count=${pageSize} `,
@@ -23,50 +23,54 @@ export const usersAPI = {
                 })
         )
     },
-    follow(userId:number) {
+    follow(userId: number) {
         return instance.post(`follow/${userId}`)
     },
-    unfollow(userId:number) {
+    unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
     },
-    getProfile(userId:number) {
+    getProfile(userId: number) {
         return profileAPI.getProfile(userId)
     }
 
 }
 export const authAPI = {
-    me () {
+    me() {
         return instance.get(`auth/me`)
     },
-    login (email:string , password:string , rememberMe = false) {
-        return instance.post(`auth/login` , {email , password , rememberMe, captcha: true})
+    login(email: string, password: string, rememberMe = false,captcha:string) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
-    logout () {
+    logout() {
         return instance.delete(`auth/login`)
     }
 }
 
 export const profileAPI = {
-    getProfile (userId:number) {
+    getProfile(userId: number) {
         return instance.get(`profile/${userId}`)
     },
-    getStatus(userId:number) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/` + userId)
     },
-    updateStatus(status:any) {
-return instance.put(`profile/status` , {status:status})
+    updateStatus(status: any) {
+        return instance.put(`profile/status`, {status: status})
     },
-    savePhoto (file:File) {
+    savePhoto(file: File) {
         let formData = new FormData()
-        formData.append('image' , file)
-        return instance.put('profile/photo' , formData , {
+        formData.append('image', file)
+        return instance.put('profile/photo', formData, {
             headers: {
-                'Content-Type' : 'multipart/form-data'
-            }})
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     },
-    saveProfile (profile:UserResponse) {
-return instance.put('profile' , profile)
+    saveProfile(profile: UserResponse) {
+        return instance.put('profile', profile)
     }
 }
-
-
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url')
+    }
+}

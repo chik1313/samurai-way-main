@@ -36,10 +36,9 @@ const enhancer = composeEnhancers(
     // other store enhancers if any
 );
 const store = createStore(rootReducer, enhancer);
-export type RootActionsType =
-    ActionTypes
 
-export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, AllStateType, unknown, RootActionsType>
+
+export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, AllStateType, unknown, ActionTypes>
 
 
 // @ts-ignore

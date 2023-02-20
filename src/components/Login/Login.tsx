@@ -11,51 +11,56 @@ import styles from '../../components/common/FormsControlls/FormControls.module.c
 type FormDataType = {
     login:string,
     password:string,
-    rememberMe: boolean
+    rememberMe: boolean,
+    captcha:string
 }
 
-export const LoginForm:React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit,error}) => {
+export const LoginForm:React.FC<InjectedFormProps<FormDataType, {captchaUrl: string  | null}>& {captchaUrl: string | null} >  = ({handleSubmit,error,captchaUrl}) => {
     return (
-            <form onSubmit={handleSubmit}>
-                <p>To log in get registered
-                    <a href={'https://social-network.samuraijs.com/'}
-                       target={'_blank'}> here
-                    </a>
-                </p>
-                <p>or use common test account credentials:</p>
-                <p>Email: free@samuraijs.com</p>
-                <p>Password: free</p>
-                <div>
-                    <Field placeholder={"Login"} name={"login"} validate={[requiredField]} component={Input}/>
+        <form onSubmit={handleSubmit}>
+            <p>To log in get registered
+                <a href={'https://social-network.samuraijs.com/'}
+                   target={'_blank'}> here
+                </a>
+            </p>
+            <p>or use common test account credentials:</p>
+            <p>Email: free@samuraijs.com</p>
+            <p>Password: free</p>
+            <div>
+                <Field placeholder={"Login"} name={"login"} validate={[requiredField]} component={Input}/>
+            </div>
+            <div>
+                <Field placeholder={"password"} name={"password"} validate={[requiredField]} component={Input}
+                       type={'password'}
+                />
+            </div>
+            <div>
+                <Field type="checkbox" name={"rememberMe"} component={Input} /> remember me
+            </div>
+            {captchaUrl && <img alt={'captcha'} src={captchaUrl}/> }
+            {captchaUrl && <Field placeholder={"Symbols from image"} name={"captcha"} validate={[requiredField]} component={Input}
+
+            /> }
+            {
+                error &&  <div className={styles.formSummaryError}>
+                    {error}
                 </div>
-                <div>
-                    <Field placeholder={"password"} name={"password"} validate={[requiredField]} component={Input}
-                    type={'password'}
-                    />
-                </div>
-                <div>
-                    <Field type="checkbox" name={"rememberMe"} component={Input} /> remember me
-                </div>
-                {
-                    error &&  <div className={styles.formSummaryError}>
-                        {error}
-                    </div>
-                }
-                <div>
-                    <button>Login</button>
-                </div>
-            </form>
+            }
+            <div>
+                <button>Login</button>
+            </div>
+        </form>
 
     )
 }
-export const LoginReduxForm = reduxForm<FormDataType>({
+export const LoginReduxForm = reduxForm<FormDataType ,{captchaUrl: string | null}>({
     form: 'login'
 })(LoginForm)
 
 
-const Login = (props:any) => {
+const Login = (props:ReturnType<typeof mapStateToProps> & mapDispatchPropsType ) => {
     const onSubmit = (formData:FormDataType) => {
-        props.login(formData.login , formData.password, formData.rememberMe)
+        props.login(formData.login , formData.password, formData.rememberMe , formData.captcha)
     }
     if (props.isAuth) {
         return <Navigate to={'/profile'}/>
@@ -63,13 +68,17 @@ const Login = (props:any) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     )
 }
-    let mapStateToProps = (state: AllStateType) => {
-        return {
-            isAuth:state.auth.isAuth
-        }
+let mapStateToProps = (state: AllStateType) => {
+    return {
+        isAuth:state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
+}
+export type mapDispatchPropsType = {
+    login:  (email: string, password: string, rememberMe: boolean, captcha: string) => void
+}
 export default connect(mapStateToProps, {login})(Login)

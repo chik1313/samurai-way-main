@@ -45,7 +45,7 @@ type PropsType = {
     authorizedUserId: number
     history: [string]
     savePhoto: (file:File) => void
-    saveProfile:(data:UserResponse)=>void
+    saveProfile:(profile:UserResponse)=>Promise<void>
 
 }
 

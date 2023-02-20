@@ -32,7 +32,7 @@ const ProfileDataForm:React.FC<InjectedFormProps<UserResponse>>  = ({handleSubmi
 
                     let keys = elements[0];
                 // let value = elements[1];
-                return <div className={s.contacts}>
+                return <div key={keys} className={s.contacts}>
                     <b>{keys}:<Field placeholder={keys} name={"contacts."+keys} validate={[]} component={Input}/></b>
                 </div>
             })}

@@ -134,7 +134,9 @@ export const saveProfile = (profile:UserResponse): RootThunkType  => async (disp
     if (response.data.resultCode === 0) {
             dispatch(getProfileThunkCreator(userId))
         } else {
+
             dispatch(stopSubmit("editProfile", {_error: response.data.messages[0] }))
+        return Promise.reject(response.data.messages[0])
         }
 }
 export default profileReducer;

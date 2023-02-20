@@ -15,7 +15,7 @@ type PropsType = {
     updateStatus: (status: any) => void
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveProfile:(profile:UserResponse)=>void
+    saveProfile:(profile:UserResponse)=>Promise<void>
 }
 
 const ProfileInfo = (props: PropsType) => {
@@ -32,8 +32,8 @@ const ProfileInfo = (props: PropsType) => {
         }
     }
     const onSubmit = (formData:UserResponse) => {
-        props.saveProfile(formData)
-        setEditMode(false)
+        props.saveProfile(formData).then(()=>setEditMode(false))
+       // setEditMode(false)
     }
 
     return (
