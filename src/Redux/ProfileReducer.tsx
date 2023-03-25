@@ -93,7 +93,7 @@ export const savePhotoAC = (file:File) => {
 export const getProfileThunkCreator = (userId:number) => {
     return async (dispatch:Dispatch) => {
         let responce = await usersAPI.getProfile(userId)
-        console.log(responce)
+
                 dispatch(setUserProfileAC(responce.data))
                }
 }
